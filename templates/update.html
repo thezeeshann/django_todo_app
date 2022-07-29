@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row">
+      <!-- add task -->
+      <div class="col-md-6 offset-3">
+        <div class="card mt-5 border border-2">
+          <div class="card-body">
+            <div class="todo-app">
+              <p>Todo App</p>
+            </div>
+            <form action="" method="POST">
+              {% csrf_token %} {% if messages %} {% for message in messages %}
+              <div class="alert alert-warning" role="alert">
+                <center>
+                  <span class="fs-6 fw-bold fst-italic">{{message}}</span>
+                </center>
+              </div>
+              {% endfor %} {% endif %} {{form.as_p}}
+              <input type="submit" class="btn btn-primary btn-sm fw-bold" value="Update" />
+              <a href="{% url 'addshowtask' %}" type="submit" class="btn btn-primary btn-sm fw-bold">Home</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

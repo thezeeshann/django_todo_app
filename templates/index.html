@@ -1,0 +1,58 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-5">
+  <div class="row">
+    <!-- add task -->
+    <div class="col-md-6 offset-3">
+      <div class="card border border-2">
+        <div class="card-body">
+          <div class="todo-app">
+            <p>Todo App</p>
+          </div>
+          <form action="" method="POST">
+            {% csrf_token %} {% if messages %} {% for message in messages %}
+            <div class="alert alert-warning" role="alert">
+              <center>
+                <span class="fs-6 fw-bold fst-italic">{{message}}</span>
+              </center>
+            </div>
+            {% endfor %} {% endif %} {{form.as_p}}
+            <input
+              type="submit"
+              class="btn btn-primary btn-sm fw-bold"
+              value="Add"
+            />
+          </form>
+
+          <!-- show data -->
+          {% for dt in data %}
+          <table class="table mt-4">
+            <td class="fw-bold">{{forloop.counter}}</td>
+            <td class="fw-bold">{{dt.title}}</td>
+            <td>
+              <a
+                href="{% url 'updatetask' dt.id %}"
+                type="submit"
+                class="float-end btn btn-success btn-sm fw-bold"
+                >Edit</a
+              >
+            </td>
+            <form action="{% url 'deletetask' dt.id %}" method="POST">
+              {% csrf_token %}
+              <td>
+                <input
+                  type="submit"
+                  class="btn btn-danger float-end btn-sm fw-bold"
+                  value="Delete"
+                />
+              </td>
+            </form>
+          </table>
+          {% endfor %}
+          <!-- end -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
